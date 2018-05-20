@@ -7,12 +7,13 @@ const playerClass = {
 }
 
 var players = [];
+var maxFitness = 0;
 
 function newPlayer(x, y){
   var body = new createjs.Shape();
   body.x = x;
   body.y = y;
-  body.graphics.beginFill(randomColor()).drawCircle(0,0, canvas.height/20);
+  body.graphics.beginFill(randomColor()).drawCircle(0,0, arenaSize/20);
   const obj = Object.assign({}, playerClass);
   obj.shape = body;
   return obj;
