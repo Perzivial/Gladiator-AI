@@ -19,8 +19,12 @@ function init() {
   //stage setup
   stage = new createjs.Stage("canvas");
   setUpArena();
-  var point = pointInArena();
+  var point = {
+    x : canvas.width/2,
+    y : canvas.height/2
+  }
   addPlayer(point.x,point.y);
+  addFood(10);
   //game loop reference
   createjs.Ticker.addEventListener("tick", handleTick);
   createjs.Ticker.framerate = 60;
@@ -35,9 +39,10 @@ function setUpArena(){
   stage.addChild(arena);
 }
 
-function pointInArena(){
+function pointInArena(mindist){
   var bufferAmount = .1;
-  var dist = (Math.random()*arenaSize/2) - ((arenaSize/2)*bufferAmount);
+  var dist = (Math.random()*((arenaSize/2) - mindist)) - ((arenaSize/2)*bufferAmount);
+  dist += mindist;
   var angle = Math.random()*360;
   var point = {
     x : (Math.sin(angle)*dist) + arena.x,
