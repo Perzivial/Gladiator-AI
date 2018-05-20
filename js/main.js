@@ -4,7 +4,8 @@ var arena;
 
 var arenaSize;
 function handleTick(){
-
+  goToClosestFood();
+  stage.update();
 }
 
 function init() {
@@ -45,8 +46,8 @@ function pointInArena(mindist){
   dist += mindist;
   var angle = Math.random()*360;
   var point = {
-    x : (Math.sin(angle)*dist) + arena.x,
-    y : (Math.cos(angle)*dist) + arena.y
+    x : (Math.cos(angle)*dist) + arena.x,
+    y : (Math.sin(angle)*dist) + arena.y
   }
   return point;
 }
