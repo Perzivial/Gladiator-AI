@@ -16,7 +16,7 @@ function newPlayer(x, y){
   body.y = y;
   body.graphics.beginFill(randomColor()).drawCircle(0,0, arenaSize/20);
   //create network
-  var perceptron = new synaptic.Architect.Perceptron(4,4,2,1);
+  var perceptron = new synaptic.Architect.Perceptron(4,4,4,1);
 
   const obj = Object.assign({}, playerClass);
   obj.shape = body;

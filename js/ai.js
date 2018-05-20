@@ -31,16 +31,26 @@ function goToClosestFood(){
     input.push(player.shape.y);
     input.push(closestFood.x);
     input.push(closestFood.y);
+
     var output = player.network.activate(input);
 
-    var velX = moveSpeed * Math.cos(toRadians(output));
-    var velY = moveSpeed * Math.sin(toRadians(output));
+    //output = toRadians(angle(player.shape.x,player.shape.y,closestFood.x,closestFood.y));
+
+    var velX = moveSpeed * Math.cos(toRadians((output*720)-360));
+    var velY = moveSpeed * Math.sin(toRadians((output*720)-360));
     player.shape.x += velX;
     player.shape.y += velY;
 
-    var learningRate = .3;
-    var target = [Math.floor(angle(player.shape.x,player.shape.y,closestFood.x,closestFood.y))];
-    player.network.propagate(learningRate, target);
+    var learningRate = .8;
+
+    var target = ((angle(player.shape.x,player.shape.y,closestFood.x,closestFood.y))+360)/720;
+    player.network.propagate(learningRate, [target]);
+
+    if(closestDist < arenaSize/20){
+      stage.removeChild(closestFood);
+      var index = foods.indexOf(closestFood);
+      foods.splice(index, 1);
+    }
 
     debugger;
   });
